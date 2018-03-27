@@ -1,32 +1,28 @@
-package com.alexyu.instagramclone;
+package com.alexyu.instagramclone.Home;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alexyu.instagramclone.R;
 import com.alexyu.instagramclone.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-/**
- * Created by j on 2018/3/26.
- */
+public class HomeActivity extends AppCompatActivity {
 
-public class ProfileActivity extends AppCompatActivity {
+    private static final String TAG = "HomeActivity";
+    private static final int ACTIVITY_NUM = 0;
 
-    private static final String TAG = "ProfileActivity";
-    private static final int ACTIVITY_NUM = 4;
-
-    private Context mContext = ProfileActivity.this;
+    private Context mContext = HomeActivity.this;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Log.d(TAG, "onCreate: started");
+        Log.d(TAG, "onCreate: starting");
 
         setupBottomNavigationView();
     }

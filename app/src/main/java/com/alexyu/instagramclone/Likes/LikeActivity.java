@@ -1,4 +1,4 @@
-package com.alexyu.instagramclone;
+package com.alexyu.instagramclone.Likes;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alexyu.instagramclone.R;
 import com.alexyu.instagramclone.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -15,12 +16,12 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
  * Created by j on 2018/3/26.
  */
 
-public class SearchActivity extends AppCompatActivity {
+public class LikeActivity extends AppCompatActivity {
 
-    private static final String TAG = "SearchActivity";
-    private static final int ACTIVITY_NUM = 1;
+    private static final String TAG = "LikeActivity";
+    private static final int ACTIVITY_NUM = 3;
 
-    private Context mContext = SearchActivity.this;
+    private Context mContext = LikeActivity.this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

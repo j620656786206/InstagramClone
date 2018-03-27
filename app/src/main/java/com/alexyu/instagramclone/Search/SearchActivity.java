@@ -1,4 +1,4 @@
-package com.alexyu.instagramclone;
+package com.alexyu.instagramclone.Search;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,21 +8,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alexyu.instagramclone.R;
 import com.alexyu.instagramclone.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-
-import java.net.ConnectException;
 
 /**
  * Created by j on 2018/3/26.
  */
 
-public class LikeActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
-    private static final String TAG = "LikeActivity";
-    private static final int ACTIVITY_NUM = 3;
+    private static final String TAG = "SearchActivity";
+    private static final int ACTIVITY_NUM = 1;
 
-    private Context mContext = LikeActivity.this;
+    private Context mContext = SearchActivity.this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

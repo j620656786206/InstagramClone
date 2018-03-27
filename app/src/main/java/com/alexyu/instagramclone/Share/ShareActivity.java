@@ -1,4 +1,4 @@
-package com.alexyu.instagramclone;
+package com.alexyu.instagramclone.Share;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alexyu.instagramclone.R;
 import com.alexyu.instagramclone.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
