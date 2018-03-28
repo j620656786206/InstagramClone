@@ -13,7 +13,7 @@ import com.alexyu.instagramclone.R;
  * Created by j on 2018/3/27.
  */
 
-public class CameraFragment extends Fragment {
+public class CameraFragment extends android.support.v4.app.Fragment {
     private static final String TAG = "CameraFragment";
 
     @Nullable

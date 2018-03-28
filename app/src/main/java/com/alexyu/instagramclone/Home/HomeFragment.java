@@ -13,7 +13,7 @@ import com.alexyu.instagramclone.R;
  * Created by j on 2018/3/27.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends android.support.v4.app.Fragment {
     private static final String TAG = "HomeFragment";
 
     @Nullable
