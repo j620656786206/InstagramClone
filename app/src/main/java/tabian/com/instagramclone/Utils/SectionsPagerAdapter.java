@@ -1,4 +1,4 @@
-package tabian.com.instagramclone.Home;
+package tabian.com.instagramclone.Utils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
