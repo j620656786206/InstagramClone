@@ -22,7 +22,7 @@
             android:layout_below="@id/relLayout1"
             android:id="@+id/relLayout2">
 
-            <include layout="@layout/snippet_center_editprofile"
+            <include layout="@layout/snippet_center_editprofile"/>
 
         </RelativeLayout>
 
