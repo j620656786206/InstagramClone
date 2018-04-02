@@ -31,16 +31,19 @@ public class EditProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         mProfilePhoto = (ImageView) view.findViewById(R.id.profile_photo);
 
-        setImageLoader();
-
         setProfileImage();
 
-        return view;
-    }
+        //back arrow for navigating back to "ProfileActivity"
+        ImageView backArrow = (ImageView) view.findViewById(R.id.backarrow);
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating back to ProfileActivity");
+                getActivity().finish();
+            }
+        });
 
-    private void setImageLoader(){
-        UniversalImageLoader universalImageLoader = new UniversalImageLoader(getActivity());
-        ImageLoader.getInstance().init(universalImageLoader.getConfig());
+        return view;
     }
 
     private void setProfileImage(){

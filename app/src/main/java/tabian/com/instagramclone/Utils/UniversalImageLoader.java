@@ -54,37 +54,37 @@ public class UniversalImageLoader {
      * a grid
      * @param imageURL
      * @param image
-     * @param mPrograssBar
+     * @param mProgressBar
      * @param append
      */
-    public static void setImage(String imageURL, ImageView image, final ProgressBar mPrograssBar, String append){
+    public static void setImage(String imageURL, ImageView image, final ProgressBar mProgressBar, String append){
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.displayImage(append + imageURL, image, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
-                if(mPrograssBar != null) {
-                    mPrograssBar.setVisibility(View.VISIBLE);
+                if(mProgressBar != null) {
+                    mProgressBar.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                if(mPrograssBar != null) {
-                    mPrograssBar.setVisibility(View.GONE);
+                if(mProgressBar != null) {
+                    mProgressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                if(mPrograssBar != null) {
-                    mPrograssBar.setVisibility(View.GONE);
+                if(mProgressBar != null) {
+                    mProgressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onLoadingCancelled(String imageUri, View view) {
-                if(mPrograssBar != null) {
-                    mPrograssBar.setVisibility(View.GONE);
+                if(mProgressBar != null) {
+                    mProgressBar.setVisibility(View.GONE);
                 }
             }
         });

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,7 +7,8 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <!-- *********************** Top Toolbar ******************************** -->
+
+        <!-- ***********************Top Toolbar***************** -->
         <RelativeLayout
             android:id="@+id/relLayout1"
             android:layout_width="match_parent"
@@ -18,13 +18,14 @@
 
         </RelativeLayout>
 
-        <!-- ********************** Middle Section ******************************* -->
+
+        <!-- ********************Middle Section*************************** -->
 
         <RelativeLayout
             android:id="@+id/relLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/relLayout1"
+            android:layout_below="@+id/relLayout1"
             android:background="@drawable/white_grey_border_bottom">
 
             <LinearLayout
@@ -34,6 +35,7 @@
                 android:orientation="horizontal"
                 android:weightSum="100">
 
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -41,12 +43,13 @@
                     android:layout_weight="25">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile_image"
+                        android:id="@+id/profile_photo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerVertical="true"
                         app:civ_border_color="@color/black"
                         app:civ_border_width="2dp" />
+
 
                 </RelativeLayout>
 
@@ -63,11 +66,12 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:id="@+id/linLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/linLayout"
+                android:layout_below="@+id/linLayout"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -75,7 +79,7 @@
                     android:id="@+id/display_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Alex"
+                    android:text="Mitch"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -85,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="live in Texas"
+                    android:text="I live in Vancouver, BC"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -94,16 +98,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="website.com"
+                    android:text="https://codingwithmitch.com"
                     android:textColor="@color/link_blue"
                     android:textSize="16sp" />
+
 
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/relLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/linLayout2"
+                android:layout_below="@+id/linLayout2"
                 android:layout_marginBottom="50dp">
 
                 <GridView
@@ -116,11 +122,15 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="1dp">
 
+
                 </GridView>
+
 
             </RelativeLayout>
 
+
         </RelativeLayout>
+
 
     </RelativeLayout>
 
