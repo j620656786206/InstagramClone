@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "400116233235",
-    "firebase_url": "https://instagramclone-b2756.firebaseio.com",
-    "project_id": "instagramclone-b2756",
-    "storage_bucket": "instagramclone-b2756.appspot.com"
+    "project_number": "1098039029188",
+    "firebase_url": "https://instagramclone-de38c.firebaseio.com",
+    "project_id": "instagramclone-de38c",
+    "storage_bucket": "instagramclone-de38c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:400116233235:android:dac77f310048e88b",
+        "mobilesdk_app_id": "1:1098039029188:android:dac77f310048e88b",
         "android_client_info": {
           "package_name": "tabian.com.instagramclone"
         }
       },
       "oauth_client": [
         {
-          "client_id": "400116233235-1to43e959tdn799m0qepfchid146n6p2.apps.googleusercontent.com",
+          "client_id": "1098039029188-b30qif9eh0qopdvcvjvch8eea22i0m38.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "tabian.com.instagramclone",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "400116233235-3j8i27ch46jhije8aefoqh7kvsni3ug2.apps.googleusercontent.com",
+          "client_id": "1098039029188-pe8khgun7k0bjdflgk9l7af8m6rk2ge0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-HUsn0gusBEEGcAZMEniIvL2ucUkEqQU"
+          "current_key": "AIzaSyAyKB-nnwbsG71J7AHENtDXX9y8prdB5SA"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "400116233235-3j8i27ch46jhije8aefoqh7kvsni3ug2.apps.googleusercontent.com",
+              "client_id": "1098039029188-pe8khgun7k0bjdflgk9l7af8m6rk2ge0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
