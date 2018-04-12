@@ -1,6 +1,7 @@
 package tabian.com.instagramclone.Home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import tabian.com.instagramclone.Login.LoginActivity;
 import tabian.com.instagramclone.R;
 import tabian.com.instagramclone.Utils.BottomNavigationViewHelper;
 import tabian.com.instagramclone.Utils.SectionsPagerAdapter;
@@ -24,6 +28,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private Context mContext = HomeActivity.this;
 
+    //firebase
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +40,9 @@ public class HomeActivity extends AppCompatActivity {
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
+
+        mAuth = FirebaseAuth.getInstance();
+        setupFirebaseAuth();
     }
 
     private void initImageLoader(){
@@ -71,4 +81,45 @@ public class HomeActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
+    /*
+    ----------------------------------Firebase--------------------------------------
+     */
+
+    private void checkCurrentUser(FirebaseUser user) {
+        Log.d(TAG, "checkCurrentUser: checking if user is logged in.");
+
+        if(user == null) {
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    /**
+     * Setup firebase auth object
+     */
+    private void setupFirebaseAuth(){
+        Log.d(TAG, "setupFirebaseAuth: setting up firebase auth");
+        onStart();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
+
+        //check if the user is logged in
+        checkCurrentUser(currentUser);
+
+        if(currentUser != null) {
+            //user is signed in
+            Log.d(TAG, "setupFirebaseAuth: signed_in" + currentUser.getUid());
+        } else {
+            //user is signed out
+            Log.d(TAG, "setupFirebaseAuth: signed_out");
+        }
+    }
+
 }
