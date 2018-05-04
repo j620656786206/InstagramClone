@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,20 +33,16 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
 
     private Context mContext;
-    private String email, username, password;
-    private EditText mEmail, mUsername, mPassword;
+    private String email, password, username;
+    private EditText mEmail, mPassword, mUsername;
     private TextView loadingPleaseWait;
     private Button btnRegister;
     private ProgressBar mProgressBar;
 
     //firebase
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseMethods firebaseMethods;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
 
-    private String append = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,17 +52,48 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseMethods = new FirebaseMethods(mContext);
         Log.d(TAG, "onCreate: started.");
 
-        initWidgets();
+        initwidget();
         setupFirebaseAuth();
+        init();
+    }
+
+    private void init() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email = mEmail.getText().toString();
+                password = mPassword.getText().toString();
+                username = mUsername.getText().toString();
+
+                if(checkInputs(email, password, username)) {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    loadingPleaseWait.setVisibility(View.VISIBLE);
+
+                    firebaseMethods.registerNewEmail(email, password, username);
+                }
+            }
+        });
+    }
+
+    private boolean checkInputs(String email, String password, String username) {
+        Log.d(TAG, "checkInputs: checking inputs for null values.");
+
+        if(email.equals("") || password.equals("") || username.equals("")){
+            Toast.makeText(mContext, "All fields must be filled out.", Toast.LENGTH_SHORT).show();
+            return  false;
+        }
+        return true;
     }
 
     /**
      * Initialize the activity widgets
      */
-    private void initWidgets() {
-        Log.d(TAG, "initWidgets: Initializing Widgets.");
+    private void initwidget(){
+        Log.d(TAG, "initwidget: Initializing Widgets.");
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         loadingPleaseWait = (TextView) findViewById(R.id.loadingPleaseWait);
+        mUsername = (EditText) findViewById(R.id.input_username);
+        btnRegister = (Button) findViewById(R.id.btn_register);
         mEmail = (EditText) findViewById(R.id.input_email);
         mPassword = (EditText) findViewById(R.id.input_password);
         mContext = RegisterActivity.this;
@@ -85,8 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /*
-
-    /*
     ----------------------------------Firebase--------------------------------------
      */
 
@@ -96,52 +122,12 @@ public class RegisterActivity extends AppCompatActivity {
     private void setupFirebaseAuth(){
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth");
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if(user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged: signed_in:" + user.getUid());
-
-                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // 1st check: Make sure the username is not already in use
-                            if(firebaseMethods.checkIfUsernameExists(username, dataSnapshot)) {
-                                append = myRef.push().getKey().substring(3, 10);
-                                Log.d(TAG, "onDataChange: username already exists. " +
-                                        "Appending random string to name: " + append);
-                            }
-
-                            username = username + append;
-
-                            // add new user to the database
-
-                            // add new user_account_settings to the database
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged: signed_out");
-                }
-            }
-        };
+        onStart();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
         /*
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -155,15 +141,11 @@ public class RegisterActivity extends AppCompatActivity {
             Log.d(TAG, "setupFirebaseAuth: signed_out");
         }
         */
-
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
     }
+
 }

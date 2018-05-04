@@ -38,22 +38,36 @@ public class FirebaseMethods {
         }
     }
 
-    public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot) {
-        Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
+    /**
+     * Register a new email and password to Firebase Authentication
+     * @param email
+     * @param password
+     * @param username
+     */
+    public void registerNewEmail(final String email, String password, final String username) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-        User user = new User();
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            userID = mAuth.getCurrentUser().getUid();
+                            Log.d(TAG, "onComplete: AuthState changed: " + userID);
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(mContext, R.string.auth_failed,
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
 
-        for (DataSnapshot ds : datasnapshot.getChildren()) {
-            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
-
-            user.setUsername(ds.getValue(User.class).getUsername());
-            Log.d(TAG, "checkIfUsernameExists: username: " + user.getUsername());
-
-            if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
-                Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + user.getUsername());
-                return true;
-            }
-        }
-        return false;
+                        // ...
+                    }
+                });
     }
 }
