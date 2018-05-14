@@ -42,7 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseMethods firebaseMethods;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
 
+    private String append = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +126,40 @@ public class RegisterActivity extends AppCompatActivity {
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth");
         mAuth = FirebaseAuth.getInstance();
         onStart();
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null) {
+            // user is signed in
+            Log.d(TAG, "onAuthStateChanged: sign_in: " + user.getUid());
+
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //1st check: Make sure the username is  not already in use
+                    if(firebaseMethods.checkIfUsernameExists(username, dataSnapshot)) {
+                        append = myRef.push().getKey().substring(3, 10);
+                        Log.d(TAG, "onDataChange: username already exists. Appending random string to name: " + append);
+                    }
+
+                    username = username + append;
+
+                    //add new user to the database
+
+                    //add new user_account_setting to the database
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        } else {
+            Log.d(TAG, "setupFirebaseAuth: signed_out");
+        }
     }
 
     @Override

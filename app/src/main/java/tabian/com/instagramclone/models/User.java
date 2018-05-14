@@ -21,7 +21,6 @@ public class User {
 
     }
 
-
     public String getUser_id() {
         return user_id;
     }
@@ -53,7 +52,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
     @Override
     public String toString() {
