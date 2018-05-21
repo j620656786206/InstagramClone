@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         setupFirebaseAuth();
+
     }
 
     private void initImageLoader(){

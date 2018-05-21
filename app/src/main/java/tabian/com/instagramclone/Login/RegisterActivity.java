@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //firebase
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseMethods firebaseMethods;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
@@ -124,47 +125,58 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private void setupFirebaseAuth(){
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth");
-        mAuth = FirebaseAuth.getInstance();
-        onStart();
 
+        mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
-            // user is signed in
-            Log.d(TAG, "onAuthStateChanged: sign_in: " + user.getUid());
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    //1st check: Make sure the username is  not already in use
-                    if(firebaseMethods.checkIfUsernameExists(username, dataSnapshot)) {
-                        append = myRef.push().getKey().substring(3, 10);
-                        Log.d(TAG, "onDataChange: username already exists. Appending random string to name: " + append);
-                    }
+                FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                    username = username + append;
+                if(user != null) {
+                    // user is signed in
+                    Log.d(TAG, "onAuthStateChanged: sign_in: " + user.getUid());
 
-                    //add new user to the database
+                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //1st check: Make sure the username is  not already in use
+                            if(firebaseMethods.checkIfUsernameExists(username, dataSnapshot)) {
+                                append = myRef.push().getKey().substring(3, 10);
+                                Log.d(TAG, "onDataChange: username already exists. Appending random string to name: " + append);
+                            }
 
-                    //add new user_account_setting to the database
+                            username = username + append;
+
+                            //add new user to the database
+                            firebaseMethods.addNewUser(email, username, "", "", "");
+
+                            Toast.makeText(mContext, "Signup successful. Sending verification email.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "setupFirebaseAuth: signed_out");
                 }
+            }
+        };
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-        } else {
-            Log.d(TAG, "setupFirebaseAuth: signed_out");
-        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
         /*
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -183,6 +195,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 }
