@@ -3,9 +3,8 @@
 <h1>Android Instagram Clone Course</h1>
 <h4>A step-by-step guide to build your own Instagram Clone</h4>
 <h4>Watch it here: <a href='https://codingwithmitch.com/courses/instagram-clone/' target='_blank'>Instagram Clone Course</a></h4>
-<hr>
-
 <h4>Full video playlist: <a href='https://www.youtube.com/playlist?list=PLgCYzUzKIBE9XqkckEJJA0I1wVKbUAOdv' target='_blank'>Instagram Clone Playlist</a></h4>
+<hr>
 
 ## Status of Android Instagram Clone
 
