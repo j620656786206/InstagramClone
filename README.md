@@ -6,6 +6,7 @@
 <hr>
 
 <h4>Full video playlist: <a href='https://www.youtube.com/playlist?list=PLgCYzUzKIBE9XqkckEJJA0I1wVKbUAOdv' target='_blank'>Instagram Clone Playlist</a></h4>
+
 ## Status of Android Instagram Clone
 
 - [x] Introduction to Android Instagram Clone App - [Build an Instagram Clone]
