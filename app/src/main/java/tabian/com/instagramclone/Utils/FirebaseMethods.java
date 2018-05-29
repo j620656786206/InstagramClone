@@ -79,6 +79,7 @@ public class FirebaseMethods {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
+                            sendVerificationEmail();
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             userID = mAuth.getCurrentUser().getUid();
@@ -97,6 +98,33 @@ public class FirebaseMethods {
                 });
     }
 
+    public void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+
+                            } else {
+                                Toast.makeText(mContext, "couldn't send verification email.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+    /**
+     * Add information to the  users nodes
+     * Add information to the  user_account_settings node
+     * @param email
+     * @param username
+     * @param description
+     * @param website
+     * @param profile_photo
+     */
     public void addNewUser(String email, String username, String description, String website, String profile_photo) {
 
         Log.d(TAG, "addNewUser: userID: " + userID);
