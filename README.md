@@ -39,7 +39,7 @@
 - [X] Check if Username Already Exists (Part 25) - [Build an Instagram Clone]
 - [x] Insert New User Data (Part 26) - [Build an Instagram Clone]
 - [x] Firebase Email Verification (Part 27) - [Build an Instagram Clone]
-- [ ] Firebase User Signout (Part 28) - [Build an Instagram Clone]
+- [x] Firebase User Signout (Part 28) - [Build an Instagram Clone]
 - [ ] Profile Fragment (Part 29) - [Build an Instagram Clone]
 - [ ] Profile Fragment Setup (Part 30) - [Build an Instagram Clone]
 
